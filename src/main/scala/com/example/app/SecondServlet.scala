@@ -1,5 +1,6 @@
 package com.example.app
 
+import com.alibaba.fastjson.JSON
 import com.typesafe.scalalogging.slf4j.Logger
 import org.scalatra.ScalatraServlet
 import org.slf4j.LoggerFactory
@@ -16,6 +17,12 @@ class SecondServlet extends ScalatraServlet{
 
   get("/gets") {
     logger.error(" =============== gets")
+  }
+
+  post("/post") {
+    val jsonString = request.body
+    val json = JSON.parseObject(jsonString)
+    logger.error(s"age : ${json.getBigInteger("age")} name : ${json.getString("name")}  ")
   }
 
 }
